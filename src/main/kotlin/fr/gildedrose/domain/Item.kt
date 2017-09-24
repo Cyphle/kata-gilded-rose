@@ -20,4 +20,10 @@ data class Item(var name: String, var sellIn: Int, var quality: Int) {
       --increaseLevel
     }
   }
+
+  fun isSellInMedium() = sellIn < 10 && sellIn >= 5
+
+  fun isSellInLow() = sellIn < 5 && sellIn >= 0
+
+  fun isSellInExpired() = sellIn < 0
 }
