@@ -45,7 +45,7 @@ class GildedRoseTest {
   fun `should update quality a number of time`() {
     val app = GildedRose(items)
     val legacyApp = GildedRoseLegacy(legacyItems)
-    var dayNumber = 1000
+    var dayNumber = 1
     while (dayNumber > 0) {
       app.updateQuality()
       legacyApp.updateQuality()
