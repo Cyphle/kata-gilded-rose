@@ -8,26 +8,21 @@ class ItemUpdater(var item: Item) {
 
     item.sellIn = item.sellIn - 1
     item.increaseQualityBy(1)
-
-    if (item.name == "Aged Brie") {
-      item = ItemAction.findItemByName(item.name).action(item)
-    } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") when {
-      item.isSellInMedium() -> item.increaseQualityBy(1)
-      item.isSellInLow() -> item.increaseQualityBy(2)
-      item.isSellInExpired() -> item.decreaseQualityBy(item.quality)
-    }
-    else {
-      item.decreaseQualityBy(2)
-      if (item.isSellInExpired()) {
-        item.decreaseQualityBy(1)
-      }
-    }
+    item = ItemAction.findItemByName(item.name).action(item)
   }
 }
 
 enum class ItemAction(val itemName: String, val action: (item: Item) -> Item) {
   AGED_BRIE("Aged Brie", { item ->
     if (item.isSellInExpired()) item.increaseQualityBy(1)
+    item
+  }),
+  BACKSTAGE("Backstage passes to a TAFKAL80ETC concert", { item ->
+    when {
+      item.isSellInMedium() -> item.increaseQualityBy(1)
+      item.isSellInLow() -> item.increaseQualityBy(2)
+      item.isSellInExpired() -> item.decreaseQualityBy(item.quality)
+    }
     item
   }),
   DEFAULT("default", { item ->
