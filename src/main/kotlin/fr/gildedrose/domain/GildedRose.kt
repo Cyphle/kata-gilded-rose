@@ -25,9 +25,7 @@ class GildedRose(var items: Array<Item>) {
         increaseQuality(i)
       }
     } else {
-      if (items[i].quality > 0) {
-        items[i].quality = items[i].quality - 1
-      }
+      decreaseQuality(i)
     }
 
     items[i].sellIn = items[i].sellIn - 1
@@ -39,11 +37,15 @@ class GildedRose(var items: Array<Item>) {
         if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
           items[i].quality = items[i].quality - items[i].quality
         } else {
-          if (items[i].quality > 0) {
-            items[i].quality = items[i].quality - 1
-          }
+          decreaseQuality(i)
         }
       }
+    }
+  }
+
+  private fun decreaseQuality(i: Int) {
+    if (items[i].quality > 0) {
+      items[i].quality = items[i].quality - 1
     }
   }
 
