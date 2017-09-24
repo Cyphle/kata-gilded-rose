@@ -1,7 +1,6 @@
 package fr.gildedrose.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Assert.*
 import org.junit.Test
 
 class GildedRoseTest {
@@ -30,5 +29,18 @@ class GildedRoseTest {
             Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
             Item("Conjured Mana Cake", 3, 6)
     ))
+  }
+
+  @Test
+  fun `should update quality a number of time`() {
+    val app = GildedRose(items)
+    val legacyApp = GildedRoseLegacy(items)
+    var loopNumber = 1000
+    while (loopNumber > 0) {
+      app.updateQuality()
+      legacyApp.updateQuality()
+      assertThat(app.items).isEqualTo(legacyApp.items)
+      --loopNumber
+    }
   }
 }
