@@ -33,11 +33,8 @@ enum class ItemAction(val itemName: String, val action: (item: Item) -> Item) {
 
   companion object {
     fun findItemByName(name: String): ItemAction {
-      val itemAction = ItemAction.values().filter { it.itemName.toLowerCase() == name.toLowerCase() }
-      return if (itemAction.isEmpty())
-        ItemAction.DEFAULT
-      else
-        itemAction.first()
+      return values()
+              .find { it.itemName.toLowerCase() == name.toLowerCase() } ?: ItemAction.DEFAULT
     }
   }
 }
