@@ -6,45 +6,47 @@ class ItemUpdater(val item: Item) {
       return
     }
     item.sellIn = item.sellIn - 1
+    increaseQualityBy(1)
 
     if (item.name.equals("Aged Brie")) {
-      increaseQuality()
-
       if (item.sellIn < 0) {
-        increaseQuality()
+        increaseQualityBy(1)
       }
     } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-      increaseQuality()
-
       if (item.sellIn < 10) {
-        increaseQuality()
+        increaseQualityBy(1)
       }
 
       if (item.sellIn < 5) {
-        increaseQuality()
+        increaseQualityBy(1)
       }
 
       if (item.sellIn < 0) {
-        item.quality = 0
+        decreaseQuality(item.quality)
       }
+
     } else {
-      decreaseQuality()
+      decreaseQuality(1)
+      decreaseQuality(1)
 
       if (item.sellIn < 0) {
-        decreaseQuality()
+        decreaseQuality(1)
       }
     }
   }
 
-  private fun decreaseQuality() {
+  private fun decreaseQuality(value: Int) {
     if (item.quality > 0) {
-      item.quality = item.quality - 1
+      item.quality = item.quality - value
     }
   }
 
-  private fun increaseQuality() {
+  private fun increaseQualityBy(value: Int) {
     if (item.quality < 50) {
-      item.quality = item.quality + 1
+      item.quality = item.quality + value
     }
   }
+}
+
+enum class SellInCeil(val ceil: Int, val qualityModification: Int) {
 }
