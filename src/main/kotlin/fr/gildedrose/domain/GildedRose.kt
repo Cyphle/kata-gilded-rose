@@ -14,6 +14,7 @@ class GildedRose(var items: Array<Item>) {
 
     if (items[i].name.equals("Aged Brie")) {
       increaseQuality(i)
+      items[i].sellIn = items[i].sellIn - 1
     } else if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
       increaseQuality(i)
 
@@ -23,11 +24,11 @@ class GildedRose(var items: Array<Item>) {
       if (items[i].sellIn < 6) {
         increaseQuality(i)
       }
+      items[i].sellIn = items[i].sellIn - 1
     } else {
       decreaseQuality(i)
+      items[i].sellIn = items[i].sellIn - 1
     }
-
-    items[i].sellIn = items[i].sellIn - 1
 
     if (items[i].name.equals("Aged Brie")) {
       if (items[i].sellIn < 0) {
