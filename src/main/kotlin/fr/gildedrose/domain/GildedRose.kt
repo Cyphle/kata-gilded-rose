@@ -30,7 +30,7 @@ class GildedRose(var items: Array<Item>) {
       }
 
       if (items[i].sellIn < 0) {
-        items[i].quality = items[i].quality - items[i].quality
+        items[i].quality = 0
       }
     } else {
       decreaseQuality(i)
